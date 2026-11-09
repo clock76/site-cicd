@@ -27,10 +27,8 @@ body {
   background-attachment: fixed;
 }
 
-/* --- Заголовок: карточка + градиентный текст --- */
+/* --- Заголовок-карточка --- */
 h1 {
-  position: relative;
-  z-index: 0;
   display: inline-block;
   padding: 2rem 2.5rem;
 
@@ -39,32 +37,21 @@ h1 {
   line-height: 1.2;
   text-align: center;
 
-  /* Градиентный текст (работает независимо от карточки) */
-  background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
-  -webkit-background-clip: text;
-          background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: #2563eb; /* фолбэк */
+  /* Тёмный текст на белой карточке — 100% читаемо */
+  color: #1e3a8a;
+
+  /* Сама карточка */
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 10px 30px -10px rgba(37, 99, 235, 0.25);
 
   animation: fadeInUp 0.7s ease-out both;
 }
 
-/* Белая карточка — отдельный слой под текстом */
-h1::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid #e5e7eb;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.06),
-    0 10px 30px -10px rgba(37, 99, 235, 0.25);
-}
-
-/* --- Анимация появления --- */
+/* --- Анимация --- */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
