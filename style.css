@@ -1,8 +1,4 @@
-/* ============================================
-   style.css — стили для статического сайта
-   ============================================ */
-
-/* --- Сброс базовых отступов и универсальные настройки --- */
+/* --- Сброс --- */
 *,
 *::before,
 *::after {
@@ -11,92 +7,75 @@
   padding: 0;
 }
 
-/* --- Базовая типографика и фон страницы --- */
-html {
-  height: 100%;
+/* --- Страница --- */
+html,
+body {
+  min-height: 100vh;
 }
 
 body {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 24px;
 
   font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #1f2933;
 
-  /* Мягкий градиентный фон */
   background: linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 50%, #ecfeff 100%);
   background-attachment: fixed;
-
-  padding: 24px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- Заголовок h1 --- */
+/* --- Заголовок: карточка + градиентный текст --- */
 h1 {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  padding: 2rem 2.5rem;
+
   font-size: clamp(1.75rem, 4vw + 1rem, 3rem);
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
 
-  /* Градиентный текст */
+  /* Градиентный текст (работает независимо от карточки) */
   background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
   -webkit-background-clip: text;
-  background-clip: text;
+          background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #2563eb; /* фолбэк для старых браузеров */
+  color: #2563eb; /* фолбэк */
 
-  /* Карточка вокруг заголовка */
-  padding: 2rem 2.5rem;
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+/* Белая карточка — отдельный слой под текстом */
+h1::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background: #ffffff;
   border-radius: 16px;
-  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.06),
     0 10px 30px -10px rgba(37, 99, 235, 0.25);
-
-  /* Тонкая рамка с градиентом (через border-image) */
-  border: 1px solid transparent;
-  background-image:
-    linear-gradient(#ffffff, #ffffff),
-    linear-gradient(135deg, #2563eb, #7c3aed);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-
-  /* Плавное появление */
-  animation: fadeInUp 0.7s ease-out both;
 }
 
 /* --- Анимация появления --- */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Уважение к настройкам пользователя --- */
 @media (prefers-reduced-motion: reduce) {
-  h1 {
-    animation: none;
-  }
+  h1 { animation: none; }
 }
 
-/* --- Адаптивность для узких экранов --- */
+/* --- Мобильные экраны --- */
 @media (max-width: 480px) {
-  body {
-    padding: 16px;
-  }
-
-  h1 {
-    padding: 1.5rem 1.25rem;
-    border-radius: 12px;
-  }
+  body { padding: 16px; }
+  h1   { padding: 1.5rem 1.25rem; border-radius: 12px; }
 }
