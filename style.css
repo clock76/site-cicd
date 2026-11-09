@@ -31,7 +31,6 @@ body {
 
 /* --- Site title, printed from CSS --- */
 body::before {
-  content: "Мой сайт";
   display: block;
   font-size: 1.25rem;
   font-weight: 600;
